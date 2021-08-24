@@ -1,6 +1,8 @@
 # imgix
 An ExpressionEngine addon to integrate with the Imgix image service. The plugin provides a simple integration with Imgix (https://imgix.com/) to change EE image URLs/paths into Imgix CDN urls with any transforms/image manipulations. It also allows you to setup reusable 'preset' manipulations (saving duplication in your code). 
 
+The tag will work with any file field (ie EE native, Assets, etc) that outputs either a URL or path for the image.
+
 ## Requirements
 - ExpressionEngine 5+
 - PHP 7+
@@ -56,15 +58,39 @@ Add in any manipulations you want! You can see options on the Imgix website (htt
 #### Params example
 
 ```
+<img src="{exp:imgix src='{my_file_field}' params='auto=format&w=200&w=400&fit=clip'}" />
+```
+
+... or ...
+
+```
 {my_file_field}
 <img src="{exp:imgix src='{url}' params='auto=format&w=200&w=400&fit=clip'}" />
 {/my_file_field}
 ```
 
+... will output ...
+
+```
+<img src="https://mysite.imgix.net/path/to/your/image.jpg?auto=format&w=200&w=400&fit=clip" />
+```
+
 #### Preset example
+
+```
+<img src="{exp:imgix src='{my_file_field}' preset='small'}" />
+```
+
+... or ...
 
 ```
 {my_file_field}
 <img src="{exp:imgix src='{url}' preset='small'}" />
 {/my_file_field}
+```
+
+... will output ...
+
+```
+<img src="https://mysite.imgix.net/path/to/your/image.jpg?auto=format&w=50&h=20" />
 ```
